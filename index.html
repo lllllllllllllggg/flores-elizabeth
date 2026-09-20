@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>21 de Septiembre - Flores Amarillas para Elizabeth</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #FFD700;
+            --secondary: #FFA500;
+        }
+
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        /* FONDO CON FLORES AMARILLAS */
+        .hero {
+            position: relative;
+            width: 100%;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .flower-background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 1;
+        }
+
+        .hero-content {
+            z-index: 10;
+            position: relative;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: white;
+            text-shadow: 2px 2px 10px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+            animation: fadeInDown 1.5s ease-out;
+        }
+
+        .hero p {
+            font-size: 1.8rem;
+            color: var(--primary);
+            text-shadow: 1px 1px 5px rgba(0,0,0,0.2);
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        /* FLORES ANIMADAS QUE FLOTAN */
+        .flower {
+            position: fixed;
+            z-index: 2;
+            font-size: 2.5rem;
+            pointer-events: none;
+            animation: float 6s infinite ease-in-out;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translateY(0px) translateX(0px) rotate(0deg);
+                opacity: 1;
+            }
+            50% {
+                transform: translateY(-200px) translateX(30px) rotate(180deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-400px) translateX(-30px) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* CARTAS */
+        .letter {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        .letter:nth-child(2) { animation-delay: 0.2s; }
+        .letter:nth-child(3) { animation-delay: 0.4s; }
+        .letter:nth-child(4) { animation-delay: 0.6s; }
+        .letter:nth-child(5) { animation-delay: 0.8s; }
+        .letter:nth-child(6) { animation-delay: 1s; }
+
+        .letter-content {
+            background: white;
+            border-radius: 15px;
+            padding: 50px;
+            max-width: 700px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            border: 3px solid var(--primary);
+            position: relative;
+        }
+
+        .letter-content::before {
+            content: '';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 30px;
+            background: var(--primary);
+            border-radius: 50%;
+            box-shadow: 0 0 20px var(--primary);
+        }
+
+        .letter-image {
+            width: 100%;
+            height: 300px;
+            border-radius: 10px;
+            object-fit: cover;
+            margin-bottom: 30px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .letter-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: #333;
+            font-style: italic;
+            margin: 20px 0;
+        }
+
+        .letter-date {
+            text-align: center;
+            font-size: 0.9rem;
+            color: var(--secondary);
+            margin-top: 30px;
+            font-weight: bold;
+        }
+
+        /* MENSAJE FINAL */
+        .final {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .final::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle, rgba(255,215,0,0.1) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: moveBackground 20s linear infinite;
+        }
+
+        @keyframes moveBackground {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        .final-content {
+            background: white;
+            border-radius: 20px;
+            padding: 60px;
+            max-width: 800px;
+            z-index: 10;
+            box-shadow: 0 30px 80px rgba(0,0,0,0.2);
+            text-align: center;
+            border: 5px solid var(--primary);
+        }
+
+        .final-content h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 30px;
+        }
+
+        .final-content p {
+            font-size: 1.3rem;
+            line-height: 2;
+            color: #333;
+            font-style: italic;
+            margin-bottom: 20px;
+        }
+
+        .heart {
+            color: #FF1493;
+            display: inline-block;
+            animation: heartbeat 1.2s infinite;
+            margin: 0 5px;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        /* BOTÓN DE MÚSICA - PROMINENTE */
+        .audio-control {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            background: rgba(255, 215, 0, 0.95);
+            border: 3px solid #333;
+            padding: 15px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            color: #333;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .audio-control:hover {
+            background: var(--primary);
+            transform: scale(1.1);
+        }
+
+        .audio-control.playing {
+            animation: none;
+        }
+
+        /* MODAL DE INSTRUCCIÓN */
+        .music-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 200;
+        }
+
+        .music-modal.show {
+            display: flex;
+        }
+
+        .music-modal-content {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            border: 3px solid var(--primary);
+        }
+
+        .music-modal-content h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 2rem;
+        }
+
+        .music-modal-content p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: #333;
+        }
+
+        .music-modal-content button {
+            background: var(--primary);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #333;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+        }
+
+        .music-modal-content button:hover {
+            background: #FFA500;
+            transform: scale(1.05);
+        }
+
+        /* SCROLL INDICATOR */
+        .scroll-indicator {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 20;
+            animation: bounce 2s infinite;
+            color: white;
+            font-size: 24px;
+            display: none;
+        }
+
+        .scroll-indicator.show {
+            display: block;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateX(-50%) translateY(0); }
+            50% { transform: translateX(-50%) translateY(-10px); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            .hero p { font-size: 1.2rem; }
+            .letter-content { padding: 30px; }
+            .final-content { padding: 30px; }
+            .final-content h2 { font-size: 1.8rem; }
+            .audio-control {
+                padding: 12px 20px;
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- AUDIO -->
+    <audio id="bgMusic" loop>
+        <source src="./audio.mp3" type="audio/mpeg">
+    </audio>
+
+    <!-- MODAL DE BIENVENIDA -->
+    <div class="music-modal show" id="musicModal">
+        <div class="music-modal-content">
+            <h2>🎵 ¡Hola Elizabeth! 🌻</h2>
+            <p>Este regalo tiene una canción especial para ti.</p>
+            <p>Haz clic en el botón para comenzar y escuchar "Flores Amarillas"</p>
+            <button onclick="startMusic()">▶️ Iniciar la Música</button>
+        </div>
+    </div>
+
+    <!-- BOTÓN DE CONTROL DE AUDIO -->
+    <button class="audio-control" onclick="toggleMusic()" title="Controlar música" id="audioBtn">
+        🎵 Música
+    </button>
+
+    <!-- PORTADA CON FONDO DE FLORES -->
+    <div class="hero">
+        <svg class="flower-background" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice">
+            <!-- FLORES AMARILLAS SIMPLES DE FONDO -->
+            
+            <!-- Flor 1 - Arriba izquierda -->
+            <g opacity="0.6">
+                <circle cx="100" cy="100" r="8" fill="#FFD700"/>
+                <circle cx="100" cy="85" r="12" fill="#FFD700"/>
+                <circle cx="115" cy="95" r="12" fill="#FFD700"/>
+                <circle cx="115" cy="105" r="12" fill="#FFD700"/>
+                <circle cx="100" cy="115" r="12" fill="#FFD700"/>
+                <circle cx="85" cy="105" r="12" fill="#FFD700"/>
+                <circle cx="85" cy="95" r="12" fill="#FFD700"/>
+            </g>
+
+            <!-- Flor 2 - Arriba derecha -->
+            <g opacity="0.5">
+                <circle cx="1100" cy="150" r="8" fill="#FFA500"/>
+                <circle cx="1100" cy="135" r="12" fill="#FFA500"/>
+                <circle cx="1115" cy="145" r="12" fill="#FFA500"/>
+                <circle cx="1115" cy="155" r="12" fill="#FFA500"/>
+                <circle cx="1100" cy="165" r="12" fill="#FFA500"/>
+                <circle cx="1085" cy="155" r="12" fill="#FFA500"/>
+                <circle cx="1085" cy="145" r="12" fill="#FFA500"/>
+            </g>
+
+            <!-- Flor 3 - Centro bajo izquierda -->
+            <g opacity="0.7">
+                <circle cx="200" cy="650" r="8" fill="#FFD700"/>
+                <circle cx="200" cy="635" r="12" fill="#FFD700"/>
+                <circle cx="215" cy="645" r="12" fill="#FFD700"/>
+                <circle cx="215" cy="655" r="12" fill="#FFD700"/>
+                <circle cx="200" cy="665" r="12" fill="#FFD700"/>
+                <circle cx="185" cy="655" r="12" fill="#FFD700"/>
+                <circle cx="185" cy="645" r="12" fill="#FFD700"/>
+            </g>
+
+            <!-- Flor 4 - Derecha centro -->
+            <g opacity="0.6">
+                <circle cx="1050" cy="500" r="8" fill="#FFA500"/>
+                <circle cx="1050" cy="485" r="12" fill="#FFA500"/>
+                <circle cx="1065" cy="495" r="12" fill="#FFA500"/>
+                <circle cx="1065" cy="505" r="12" fill="#FFA500"/>
+                <circle cx="1050" cy="515" r="12" fill="#FFA500"/>
+                <circle cx="1035" cy="505" r="12" fill="#FFA500"/>
+                <circle cx="1035" cy="495" r="12" fill="#FFA500"/>
+            </g>
+
+            <!-- Flor 5 - Abajo derecha -->
+            <g opacity="0.5">
+                <circle cx="900" cy="720" r="8" fill="#FFD700"/>
+                <circle cx="900" cy="705" r="12" fill="#FFD700"/>
+                <circle cx="915" cy="715" r="12" fill="#FFD700"/>
+                <circle cx="915" cy="725" r="12" fill="#FFD700"/>
+                <circle cx="900" cy="735" r="12" fill="#FFD700"/>
+                <circle cx="885" cy="725" r="12" fill="#FFD700"/>
+                <circle cx="885" cy="715" r="12" fill="#FFD700"/>
+            </g>
+
+            <!-- Flor 6 - Centro superior -->
+            <g opacity="0.7">
+                <circle cx="600" cy="250" r="8" fill="#FFA500"/>
+                <circle cx="600" cy="235" r="12" fill="#FFA500"/>
+                <circle cx="615" cy="245" r="12" fill="#FFA500"/>
+                <circle cx="615" cy="255" r="12" fill="#FFA500"/>
+                <circle cx="600" cy="265" r="12" fill="#FFA500"/>
+                <circle cx="585" cy="255" r="12" fill="#FFA500"/>
+                <circle cx="585" cy="245" r="12" fill="#FFA500"/>
+            </g>
+        </svg>
+
+        <div class="hero-content">
+            <h1>🌻 Flores Amarillas 🌻</h1>
+            <p>Para Elizabeth</p>
+            <p style="font-size: 1.2rem; margin-top: 30px;">21 de Septiembre</p>
+        </div>
+    </div>
+
+    <!-- CARTAS -->
+    <div class="letter">
+        <div class="letter-content">
+            <img src="./assets/img1.png" alt="Foto 1" class="letter-image">
+            <div class="letter-text">
+                El día que subimos el monte awu que lindo fue ese día que usted estaba comiendo y la subí a mis hombros y lo subimos los dos juntos ese día fue muy lindo el estar escuchando su voz eso fue demasiado lindo y me dabas motivación para llegar al final y después nos tomamos fotos juntitos que lindo mi niña lo subiría miles de veces con tal de verte feliz mi niña y más si es a tu lado mami.
+            </div>
+            <div class="letter-date">💛 Monte Awu</div>
+        </div>
+    </div>
+
+    <div class="letter">
+        <div class="letter-content">
+            <img src="./assets/img2.png" alt="Foto 2" class="letter-image">
+            <div class="letter-text">
+                El día que me tuve que ir hacer de comer mi niña hermosa y usted me cuidó y me dijo si pasa algo me meto a su cuenta y lo saco que lindo es eso cuando usted me demuestra que me cuida que lindo es eso mi niña hermosa te quiero como no tienes idea mi niña hermosa gracias por siempre cuidarme amor.
+            </div>
+            <div class="letter-date">💛 Momentos de Cuidado</div>
+        </div>
+    </div>
+
+    <div class="letter">
+        <div class="letter-content">
+            <img src="./assets/img3.png" alt="Foto 3" class="letter-image">
+            <div class="letter-text">
+                El día que nos abrimos los dos mami nuestro corazón y me contó sus problemas y por fin la escuché llorar mi niña hermosa gracias por darme esa confianza mi niña hermosa recuerde que nunca te voy a juzgar mi cariño siempre te voy a entender mi princesa nunca pienses que estás solita mami te amo liz.
+            </div>
+            <div class="letter-date">💛 Nuestro Corazón</div>
+        </div>
+    </div>
+
+    <div class="letter">
+        <div class="letter-content">
+            <img src="./assets/img4.png" alt="Foto 4" class="letter-image">
+            <div class="letter-text">
+                El día que me puso un chamaco mami jaja que linda se veía ese día mi niña hermosa se que es solo un personaje de un juego mami pero usted siempre se ve bien linda no se cómo le haces chula pero me enamoras más y más te amo mi niña.
+            </div>
+            <div class="letter-date">💛 Tu Belleza</div>
+        </div>
+    </div>
+
+    <div class="letter">
+        <div class="letter-content">
+            <img src="./assets/img5.png" alt="Foto 5" class="letter-image">
+            <div class="letter-text">
+                El día que nos cazamos se que no fue algo que usted esperaba mami pero un día nos vamos a casar bien mi niña hermosa y le daré una boda que realmente usted merece mi niña hermosa porque usted se merece todo mami siempre se lo diré te amo liz y nunca lo dejaré de hacer mami me encantas cada día mi amor crece por usted mi niña preciosa gracias por todo mami.
+            </div>
+            <div class="letter-date">💛 Nuestro Futuro</div>
+        </div>
+    </div>
+
+    <!-- MENSAJE FINAL -->
+    <div class="final">
+        <div class="final-content">
+            <h2>Elizabeth <span class="heart">💛</span></h2>
+            <p>
+                Quería crear algo especial para ti en este 21 de septiembre, el día de las flores amarillas. Cada momento que compartimos es un regalo, cada palabra tuya, cada sonrisa, cada lágrima que has compartido conmigo es un tesoro que guardaré en mi corazón.
+            </p>
+            <p>
+                Te prometo amarte con todo mi ser, cuidarte siempre, estar contigo en cada momento, en las montañas, en los juegos, en tus tristezas y en tus alegrías. Eres mi princesa, mi reina, mi todo.
+            </p>
+            <p style="font-size: 1.5rem; margin-top: 40px;">
+                Te amo, Liz <span class="heart">💛</span> <span class="heart">💛</span> <span class="heart">💛</span>
+            </p>
+            <p style="margin-top: 30px; font-size: 1rem; color: #666;">
+                Con todo mi amor,<br> Tu amor de siempre 🌻
+            </p>
+        </div>
+    </div>
+
+    <!-- INDICADOR DE SCROLL -->
+    <div class="scroll-indicator show" id="scrollIndicator">↓</div>
+
+    <script>
+        let isMusicPlaying = false;
+        const audio = document.getElementById('bgMusic');
+        const audioBtn = document.getElementById('audioBtn');
+        const musicModal = document.getElementById('musicModal');
+        const scrollIndicator = document.getElementById('scrollIndicator');
+
+        // Iniciar música
+        function startMusic() {
+            musicModal.classList.remove('show');
+            audio.volume = 0.5;
+            audio.play().then(() => {
+                isMusicPlaying = true;
+                audioBtn.textContent = '🎵 Música (Reproduciendo)';
+                audioBtn.classList.add('playing');
+                createFlowers();
+            }).catch(err => {
+                console.log('Error al reproducir:', err);
+            });
+        }
+
+        // Alternar música
+        function toggleMusic() {
+            if (isMusicPlaying) {
+                audio.pause();
+                isMusicPlaying = false;
+                audioBtn.textContent = '🔇 Silenciado';
+                audioBtn.classList.remove('playing');
+            } else {
+                audio.play().then(() => {
+                    isMusicPlaying = true;
+                    audioBtn.textContent = '🎵 Música (Reproduciendo)';
+                    audioBtn.classList.add('playing');
+                }).catch(err => {
+                    console.log('Error:', err);
+                });
+            }
+        }
+
+        // Generar flores animadas
+        function createFlowers() {
+            const heroSection = document.querySelector('.hero');
+            const flowerEmojis = ['🌻', '🌼', '✿', '❀'];
+            
+            for (let i = 0; i < 30; i++) {
+                const flower = document.createElement('div');
+                flower.className = 'flower';
+                flower.textContent = flowerEmojis[Math.floor(Math.random() * flowerEmojis.length)];
+                flower.style.left = Math.random() * 100 + '%';
+                flower.style.top = Math.random() * 100 + '%';
+                flower.style.animationDuration = (4 + Math.random() * 3) + 's';
+                flower.style.animationDelay = Math.random() * 2 + 's';
+                heroSection.appendChild(flower);
+            }
+        }
+
+        // Controlar indicador de scroll
+        document.addEventListener('scroll', () => {
+            if (window.scrollY > window.innerHeight / 2) {
+                scrollIndicator.classList.remove('show');
+            } else {
+                scrollIndicator.classList.add('show');
+            }
+        });
+    </script>
+</body>
+</html>
